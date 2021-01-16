@@ -1,18 +1,18 @@
 import axios from 'axios'
 
-export const addDetailsApi = (details) => {
+export const addRecordsApi = (records) => {
   let url = 'http://dev.nyusoft.in/nyusoft-practical/backend/api/postData'
 
   let form_data = new FormData()
-  form_data.append('name', details.name)
-  form_data.append('email', details.email)
-  form_data.append('phone', details.phone)
-  form_data.append('gender', details.gender)
-  form_data.append('education', details.education)
-  form_data.append('hobby', details.hobby)
-  form_data.append('experience', details.experience)
-  form_data.append('profileimg', details.profileimg, details.profileimg.name)
-  form_data.append('message', details.message)
+  form_data.append('name', records.name)
+  form_data.append('email', records.email)
+  form_data.append('phone', records.phone)
+  form_data.append('gender', records.gender)
+  form_data.append('education', records.education)
+  form_data.append('hobby', records.hobby)
+  form_data.append('experience', records.experience)
+  form_data.append('profileimg', records.profileimg, records.profileimg.name)
+  form_data.append('message', records.message)
 
   return axios
     .post(url, form_data, {
@@ -46,7 +46,7 @@ export const getAllRecordsApi = (searchText, limit, offset) => {
     })
 }
 
-export const deleteDetailsApi = (id) => {
+export const deleteRecordsApi = (id) => {
   let url = 'http://dev.nyusoft.in/nyusoft-practical/backend/api/deleteData'
 
   let form_data = new FormData()
@@ -65,19 +65,19 @@ export const deleteDetailsApi = (id) => {
     })
 }
 
-export const updatedDetailsApi = (details) => {
+export const updatedRecordsApi = (records) => {
   let url = 'http://dev.nyusoft.in/nyusoft-practical/backend/api/editData'
 
   let form_data = new FormData()
-  form_data.append('name', details.name)
-  form_data.append('email', details.email)
-  form_data.append('phone', details.phone)
-  form_data.append('gender', details.gender)
-  form_data.append('education', details.education)
-  form_data.append('hobby', details.hobby)
-  form_data.append('experience', details.experience)
-  form_data.append('profileimg', details.profileimg, details.profileimg.name)
-  form_data.append('message', details.message)
+  form_data.append('name', records.name)
+  form_data.append('email', records.email)
+  form_data.append('phone', records.phone)
+  form_data.append('gender', records.gender)
+  form_data.append('education', records.education)
+  form_data.append('hobby', records.hobby)
+  form_data.append('experience', records.experience)
+  form_data.append('profileimg', records.profileimg, records.profileimg.name)
+  form_data.append('message', records.message)
 
   return axios
     .post(url, form_data, {

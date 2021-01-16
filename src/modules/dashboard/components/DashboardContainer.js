@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import Dashboard from './Dashboard'
 import * as action from '../redux/action'
-import ProductModal from './ProductModal/ProductModal'
+import RecordModal from './RecordModal/RecordModal'
 
 import { noop } from '../../../utils'
 
@@ -115,15 +115,15 @@ class DashboardContainer extends Component {
     }
   }
 
-  addDetailsInputHandler = (event) => {
+  addRecordsInputHandler = (event) => {
     const { name, value } = event.target
     this.setState({
       [name]: value
     })
   }
 
-  addDetailsButtonHandler = () => {
-    const { addDetails } = this.props
+  addRecordsButtonHandler = () => {
+    const { addRecords } = this.props
     const { experienceList, hobby } = this.state
 
     const tempExperienceList =
@@ -131,26 +131,26 @@ class DashboardContainer extends Component {
 
     const tempHobby = hobby && hobby.map((x) => x.category.toLowerCase()).join()
 
-    const details = {
+    const records = {
       ...this.state,
       experience: tempExperienceList,
       hobby: tempHobby
     }
-    delete details.experienceList
-    delete details.open
-    delete details.isEditMode
-    addDetails(details)
+    delete records.experienceList
+    delete records.open
+    delete records.isEditMode
+    addRecords(records)
     this.clearState()
   }
 
-  deleteDetailsBtnHandler = (e, id) => {
-    const { deleteDetails, getAllRecords } = this.props
-    deleteDetails(id).then(() => {
-      getAllRecords('', 100, 0)
+  deleteRecordsBtnHandler = (e, id) => {
+    const { deleteRecords, getAllRecords } = this.props
+    deleteRecords(id).then(() => {
+      getAllRecords('', 5, 0)
     })
   }
 
-  editDetailsBtnHandler = (e, detail) => {
+  editRecordsBtnHandler = (e, record) => {
     const {
       id,
       name,
@@ -162,8 +162,7 @@ class DashboardContainer extends Component {
       experience,
       profileimg,
       message
-    } = detail
-    console.log('RB:: => DashboardContainer => detail', detail)
+    } = record
     const tempExperience = experience.split(',').map((x) => {
       return {
         experience: x
@@ -190,8 +189,8 @@ class DashboardContainer extends Component {
     this.handleModal()
   }
 
-  updateDetailsButtonHandler = () => {
-    const { updateDetails, getAllRecords } = this.props
+  updateRecordsButtonHandler = () => {
+    const { updateRecords, getAllRecords } = this.props
     const { experienceList, hobby } = this.state
 
     const tempExperienceList =
@@ -199,17 +198,17 @@ class DashboardContainer extends Component {
 
     const tempHobby = hobby && hobby.map((x) => x.category.toLowerCase()).join()
 
-    const updatedDetails = {
+    const updatedRecords = {
       ...this.state,
       experience: tempExperienceList,
       hobby: tempHobby
     }
-    delete updatedDetails.experienceList
-    delete updatedDetails.open
-    delete updatedDetails.isEditMode
-    console.log('RB:: updated record', updatedDetails)
-    updateDetails(updatedDetails).then(() => {
-      getAllRecords('', 100, 0)
+    delete updatedRecords.experienceList
+    delete updatedRecords.open
+    delete updatedRecords.isEditMode
+    console.log('RB:: updated record', updatedRecords)
+    updateRecords(updatedRecords).then(() => {
+      getAllRecords('', 5, 0)
     })
     this.handleModal()
     this.clearState()
@@ -220,19 +219,19 @@ class DashboardContainer extends Component {
     return (
       <>
         <Dashboard
-          addDetailsButtonHandler={this.addDetailsButtonHandler}
-          addDetailsInputHandler={this.addDetailsInputHandler}
+          addRecordsButtonHandler={this.addRecordsButtonHandler}
+          addRecordsInputHandler={this.addRecordsInputHandler}
           state={this.state}
-          deleteDetailsBtnHandler={this.deleteDetailsBtnHandler}
-          editDetailsBtnHandler={this.editDetailsBtnHandler}
+          deleteRecordsBtnHandler={this.deleteRecordsBtnHandler}
+          editRecordsBtnHandler={this.editRecordsBtnHandler}
           handleModal={this.handleModal}
         />
-        <ProductModal
+        <RecordModal
           open={open}
           handleModal={this.handleModal}
-          addDetailsButtonHandler={this.addDetailsButtonHandler}
-          addDetailsInputHandler={this.addDetailsInputHandler}
-          updateDetailsButtonHandler={this.updateDetailsButtonHandler}
+          addRecordsButtonHandler={this.addRecordsButtonHandler}
+          addRecordsInputHandler={this.addRecordsInputHandler}
+          updateRecordsButtonHandler={this.updateRecordsButtonHandler}
           state={this.state}
           clearState={this.clearState}
           handleGenderChange={this.handleGenderChange}
@@ -249,24 +248,24 @@ class DashboardContainer extends Component {
 }
 
 DashboardContainer.propTypes = {
-  addDetails: PropTypes.func,
-  deleteDetails: PropTypes.func,
-  updateDetails: PropTypes.func
+  addRecords: PropTypes.func,
+  deleteRecords: PropTypes.func,
+  updateRecords: PropTypes.func
 }
 
 DashboardContainer.defaultProps = {
-  addDetails: noop,
-  deleteDetails: noop,
-  updateDetails: noop
+  addRecords: noop,
+  deleteRecords: noop,
+  updateRecords: noop
 }
 
 const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-  addDetails: (details) => dispatch(action.addDetails(details)),
-  deleteDetails: (id) => dispatch(action.deleteDetails(id)),
-  updateDetails: (updatedDetails) =>
-    dispatch(action.updateDetails(updatedDetails)),
+  addRecords: (records) => dispatch(action.addRecords(records)),
+  deleteRecords: (id) => dispatch(action.deleteRecords(id)),
+  updateRecords: (updatedRecords) =>
+    dispatch(action.updateRecords(updatedRecords)),
   getAllRecords: (searchText, limit, offset) =>
     dispatch(action.getAllRecords(searchText, limit, offset))
 })

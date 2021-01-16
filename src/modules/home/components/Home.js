@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Home = (props) => {
   return (
     <div>
-      <h1>Welcome to Products Book</h1>
+      <h1>Welcome to Records Book</h1>
     </div>
   )
 }

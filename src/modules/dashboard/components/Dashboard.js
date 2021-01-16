@@ -5,50 +5,55 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
 import { noop } from '../../../utils'
-import ProductListContainer from './ProductList/ProductListContainer'
+import RecordListContainer from './RecordList/RecordListContainer'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1)
+      // padding: theme.spacing(1)
+      // padding: 0
     }
   },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
+  addNewBtn: {
+    padding: '0.8rem',
+    margin: '24px'
   }
 }))
 
 const Dashboard = ({
-  deleteDetailsBtnHandler,
-  editDetailsBtnHandler,
+  deleteRecordsBtnHandler,
+  editRecordsBtnHandler,
   handleModal
 }) => {
   const classes = useStyles()
 
   return (
     <div className={classes.root}>
-      <Button variant='contained' color='primary' onClick={handleModal}>
+      <Button
+        variant='contained'
+        color='primary'
+        onClick={handleModal}
+        className={classes.addNewBtn}
+      >
         Add New Record
       </Button>
-      <ProductListContainer
-        deleteDetailsBtnHandler={deleteDetailsBtnHandler}
-        editDetailsBtnHandler={editDetailsBtnHandler}
+      <RecordListContainer
+        deleteRecordsBtnHandler={deleteRecordsBtnHandler}
+        editRecordsBtnHandler={editRecordsBtnHandler}
       />
     </div>
   )
 }
 
 Dashboard.propTypes = {
-  deleteDetailsBtnHandler: PropTypes.func,
-  editDetailsBtnHandler: PropTypes.func,
+  deleteRecordsBtnHandler: PropTypes.func,
+  editRecordsBtnHandler: PropTypes.func,
   handleModal: PropTypes.func
 }
 
 Dashboard.defaultProps = {
-  deleteDetailsBtnHandler: noop,
-  editDetailsBtnHandler: noop,
+  deleteRecordsBtnHandler: noop,
+  editRecordsBtnHandler: noop,
   handleModal: noop
 }
 

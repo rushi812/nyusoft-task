@@ -21,8 +21,7 @@ import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
-
-import { noop } from '../../../../utils'
+import { noop } from '../../../../../utils'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -66,9 +65,9 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 function ProductForm({
-  addDetailsButtonHandler,
-  addDetailsInputHandler,
-  updateDetailsButtonHandler,
+  addRecordsButtonHandler,
+  addRecordsInputHandler,
+  updateRecordsButtonHandler,
   state,
   handleModal,
   clearState,
@@ -102,11 +101,11 @@ function ProductForm({
         <Paper className={classes.paper}>
           {state.isEditMode ? (
             <Typography component='h1' variant='h4' align='center'>
-              Update Details
+              Update Record
             </Typography>
           ) : (
             <Typography component='h1' variant='h4' align='center'>
-              Add New Details
+              Add New Record
             </Typography>
           )}
           <React.Fragment>
@@ -115,7 +114,7 @@ function ProductForm({
                 <Grid item xs={12}>
                   <TextField
                     type='text'
-                    onChange={addDetailsInputHandler}
+                    onChange={addRecordsInputHandler}
                     value={state.name}
                     id='name'
                     name='name'
@@ -128,7 +127,7 @@ function ProductForm({
                   <TextField
                     type='email'
                     value={state.email}
-                    onChange={addDetailsInputHandler}
+                    onChange={addRecordsInputHandler}
                     id='email'
                     name='email'
                     label='Email'
@@ -139,7 +138,7 @@ function ProductForm({
                 <Grid item xs={12}>
                   <TextField
                     type='number'
-                    onChange={addDetailsInputHandler}
+                    onChange={addRecordsInputHandler}
                     value={state.phone}
                     id='phone'
                     name='phone'
@@ -281,7 +280,7 @@ function ProductForm({
                     multiline
                     rows={2}
                     rowsMax={4}
-                    onChange={addDetailsInputHandler}
+                    onChange={addRecordsInputHandler}
                     value={state.message}
                     id='message'
                     name='message'
@@ -307,7 +306,7 @@ function ProductForm({
                   <Button
                     variant='contained'
                     color='primary'
-                    onClick={updateDetailsButtonHandler}
+                    onClick={updateRecordsButtonHandler}
                     className={classes.button}
                   >
                     Update
@@ -317,7 +316,7 @@ function ProductForm({
                     variant='contained'
                     color='primary'
                     className={classes.button}
-                    onClick={addDetailsButtonHandler}
+                    onClick={addRecordsButtonHandler}
                   >
                     Save
                   </Button>
@@ -332,18 +331,18 @@ function ProductForm({
 }
 
 ProductForm.propTypes = {
-  addDetailsButtonHandler: PropTypes.func,
-  addDetailsInputHandler: PropTypes.func,
-  updateDetailsButtonHandler: PropTypes.func,
+  addRecordsButtonHandler: PropTypes.func,
+  addRecordsInputHandler: PropTypes.func,
+  updateRecordsButtonHandler: PropTypes.func,
   state: PropTypes.instanceOf(Object),
   handleModal: PropTypes.func,
   clearState: PropTypes.func
 }
 
 ProductForm.defaultProps = {
-  addDetailsButtonHandler: noop,
-  addDetailsInputHandler: noop,
-  updateDetailsButtonHandler: noop,
+  addRecordsButtonHandler: noop,
+  addRecordsInputHandler: noop,
+  updateRecordsButtonHandler: noop,
   state: {},
   handleModal: noop,
   clearState: noop

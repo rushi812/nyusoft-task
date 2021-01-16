@@ -1,11 +1,12 @@
 import * as actionTypes from './actionTypes'
 
 const INITIAL_STATE = {
-  details: [],
-  addDetailsLoading: false,
+  records: [],
+  addRecordsLoading: false,
   getRecordsLoading: false,
-  deleteDetailsLoading: false,
-  updateDetailsLoading: false
+  deleteRecordsLoading: false,
+  updateRecordsLoading: false,
+  isMoreData: false
 }
 
 const appReducer = (state = INITIAL_STATE, action) => {
@@ -17,59 +18,71 @@ const appReducer = (state = INITIAL_STATE, action) => {
         ...state,
         getRecordsLoading: true
       }
-    case actionTypes.GET_RECORDS_SUCCESS:
+    case actionTypes.GET_RECORDS_SUCCESS: {
+      let tempRecords
+      if (payload && payload.length > 0) {
+        if (state.records && state.records.length > 0) {
+          tempRecords = [...state.records, ...payload]
+        } else {
+          tempRecords = payload
+        }
+      } else {
+        tempRecords = []
+      }
       return {
         ...state,
-        getRecordsLoading: true,
-        details: payload
+        getRecordsLoading: false,
+        records: tempRecords,
+        isMoreData: payload && payload.length > 0 ? true : false
       }
+    }
     case actionTypes.GET_RECORDS_ERROR:
       return {
         ...state,
         getRecordsLoading: false
       }
-    case actionTypes.ADD_DETAILS_LOADING:
+    case actionTypes.ADD_RECORDS_LOADING:
       return {
         ...state,
-        addDetailsLoading: true
+        addRecordsLoading: true
       }
-    case actionTypes.ADD_DETAILS_SUCCESS:
+    case actionTypes.ADD_RECORDS_SUCCESS:
       return {
         ...state,
-        addDetailsLoading: false,
-        details: [...state.details, payload]
+        addRecordsLoading: false,
+        records: [...state.records, payload]
       }
-    case actionTypes.ADD_DETAILS_ERROR:
+    case actionTypes.ADD_RECORDS_ERROR:
       return {
         ...state,
-        addDetailsLoading: false
+        addRecordsLoading: false
       }
-    case actionTypes.DELETE_DETAILS_LOADING:
+    case actionTypes.DELETE_RECORDS_LOADING:
       return {
         ...state,
-        deleteDetailsLoading: true
+        deleteRecordsLoading: true
       }
-    case actionTypes.DELETE_DETAILS_SUCCESS:
+    case actionTypes.DELETE_RECORDS_SUCCESS:
       return {
         ...state,
-        deleteDetailsLoading: false,
-        details: state.details.filter((x) => x.id !== payload)
+        deleteRecordsLoading: false,
+        records: state.records.filter((x) => x.id !== payload)
       }
-    case actionTypes.DELETE_DETAILS_ERROR:
+    case actionTypes.DELETE_RECORDS_ERROR:
       return {
         ...state,
-        deleteDetailsLoading: false
+        deleteRecordsLoading: false
       }
-    case actionTypes.UPDATE_DETAILS_LOADING:
+    case actionTypes.UPDATE_RECORDS_LOADING:
       return {
         ...state,
-        updateDetailsLoading: true
+        updateRecordsLoading: true
       }
-    case actionTypes.UPDATE_DETAILS_SUCCESS:
+    case actionTypes.UPDATE_RECORDS_SUCCESS:
       return {
         ...state,
-        updateDetailsLoading: false
-        // details: state.details.map((x) =>
+        updateRecordsLoading: false
+        // records: state.records.map((x) =>
         //   x.id === payload.id
         //     ? {
         //         ...payload
@@ -77,10 +90,10 @@ const appReducer = (state = INITIAL_STATE, action) => {
         //     : x
         // )
       }
-    case actionTypes.UPDATE_DETAILS_ERROR:
+    case actionTypes.UPDATE_RECORDS_ERROR:
       return {
         ...state,
-        updateDetailsLoading: false
+        updateRecordsLoading: false
       }
     default:
       return state

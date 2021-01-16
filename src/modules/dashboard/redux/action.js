@@ -1,10 +1,10 @@
 import * as actionTypes from './actionTypes'
 
 import {
-  addDetailsApi,
+  addRecordsApi,
   getAllRecordsApi,
-  deleteDetailsApi,
-  updatedDetailsApi
+  deleteRecordsApi,
+  updatedRecordsApi
 } from '../../../api/api'
 
 export const getAllRecords = (searchText, limit, offset) => ({
@@ -12,17 +12,17 @@ export const getAllRecords = (searchText, limit, offset) => ({
   payload: getAllRecordsApi(searchText, limit, offset)
 })
 
-export const addDetails = (details) => ({
-  type: actionTypes.ADD_DETAILS,
-  payload: addDetailsApi(details)
+export const addRecords = (records) => ({
+  type: actionTypes.ADD_RECORDS,
+  payload: addRecordsApi(records)
 })
 
-export const deleteDetails = (id) => ({
-  type: actionTypes.DELETE_DETAILS,
-  payload: deleteDetailsApi(id)
+export const deleteRecords = (id) => ({
+  type: actionTypes.DELETE_RECORDS,
+  payload: deleteRecordsApi(id)
 })
 
-export const updateDetails = (updatedDetails) => ({
-  type: actionTypes.UPDATE_DETAILS,
-  payload: updatedDetailsApi(updatedDetails)
+export const updateRecords = (updatedRecords) => ({
+  type: actionTypes.UPDATE_RECORDS,
+  payload: updatedRecordsApi(updatedRecords)
 })

@@ -6,7 +6,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Modal from '@material-ui/core/Modal'
 import Backdrop from '@material-ui/core/Backdrop'
 import Fade from '@material-ui/core/Fade'
-import ProductForm from '../ProductForm/ProductForm'
+
+import RecordForm from './RecordForm/RecordForm'
 import { noop } from '../../../../utils'
 
 const useStyles = makeStyles((theme) => ({
@@ -19,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
 const ProductModal = ({
   open,
   handleModal,
-  addDetailsButtonHandler,
-  addDetailsInputHandler,
-  updateDetailsButtonHandler,
+  addRecordsButtonHandler,
+  addRecordsInputHandler,
+  updateRecordsButtonHandler,
   state,
   clearState,
   handleGenderChange,
@@ -49,13 +50,13 @@ const ProductModal = ({
         }}
       >
         <Fade in={open}>
-          <ProductForm
-            addDetailsButtonHandler={() => {
-              addDetailsButtonHandler()
+          <RecordForm
+            addRecordsButtonHandler={() => {
+              addRecordsButtonHandler()
               handleModal()
             }}
-            addDetailsInputHandler={addDetailsInputHandler}
-            updateDetailsButtonHandler={updateDetailsButtonHandler}
+            addRecordsInputHandler={addRecordsInputHandler}
+            updateRecordsButtonHandler={updateRecordsButtonHandler}
             state={state}
             handleModal={handleModal}
             clearState={clearState}
